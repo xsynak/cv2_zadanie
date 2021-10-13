@@ -48,11 +48,33 @@ int main(void)
   /* Enable clock for GPIO port A*/
 
 	//type your code for GPIOA clock enable here:
+  *((volatile uint32_t *) (uint32_t)(0x40021000 + 0x00000014U)) |= (uint32_t)(1 << 17);
 
 
   /* GPIOA pin 3 and 4 setup */
 
 	//type your code for GPIOA pins setup here:
+
+  *((volatile uint32_t *)GPIOA_BASE_ADDR) &= ~(uint32_t)(0x3 << 8);
+
+  *((volatile uint32_t *)GPIOA_BASE_ADDR) |= (uint32_t)(1 << 8); //output mode
+
+  *((volatile uint32_t *)GPIOA_BASE_ADDR) &= ~(uint32_t)(0x3 << 6);
+
+  /*GPIO OTYPER register*/
+   *((volatile uint32_t *)((uint32_t)(0x48000000 + 0x04U))) &= ~(1 << 4);
+
+   /*GPIO OSPEEDR register*/
+   //Set Low speed for GPIOA pin 3
+   *((volatile uint32_t *)((uint32_t)(0x48000000 + 0x08U))) &= ~(0x3 << 8);
+
+   /*GPIO PUPDR register, reset*/
+   *((volatile uint32_t *)((uint32_t)(0x48000000 + 0x0CU))) &= ~(0x3 << 6);
+
+   *((volatile uint32_t *)((uint32_t)(0x48000000 + 0x0CU))) |= (1 << 6);
+   //*((volatile uint32_t *)((uint32_t)(0x48000000 + 0x0CU))) &= ~(0x3 << 8);
+
+
 
 
   while (1)
@@ -62,18 +84,22 @@ int main(void)
 		  // 0.25s delay
 		  LL_mDelay(250);
 		  LED_ON;
+
 		  // 0.25s delay
 		  LL_mDelay(250);
 		  LED_OFF;
+
 	  }
 	  else
 	  {
 		  // 1s delay
 		  LL_mDelay(1000);
 		  LED_ON;
+
 		  // 1s delay
 		  LL_mDelay(1000);
 		  LED_OFF;
+
 	  }
   }
 
