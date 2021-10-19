@@ -1,8 +1,7 @@
 /*
  * assignment.h
  *
- *  Created on: 27. 9. 2020
- *      Author: Stancoj
+ *
  */
 
 #ifndef ASSIGNMENT_H_

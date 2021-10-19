@@ -46,16 +46,14 @@ int main(void)
 
 
   /* Enable clock for GPIO port A*/
-
-	//type your code for GPIOA clock enable here:
   *((volatile uint32_t *) (uint32_t)(0x40021000 + 0x00000014U)) |= (uint32_t)(1 << 17);
 
 
-  /* GPIOA pin 3 and 4 setup */
+     /* GPIOA pin 3 and 4 setup */
 
 	//type your code for GPIOA pins setup here:
 
-  //MODER_REG
+    //MODER_REG
 
     GPIOA_MODER_REG &= ~(uint32_t)(0x3 << 8);
 
@@ -63,13 +61,13 @@ int main(void)
 
     GPIOA_MODER_REG &= ~(uint32_t)(0x3 << 6);
 
-  /*GPIO OTYPER register*/
+   /*GPIO OTYPER register*/
 
-    GPIOA_OTYPER_REG &= ~(1 << 4);
+   GPIOA_OTYPER_REG &= ~(1 << 4);
 
-      /*GPIO OSPEEDR register*/
-      //Set Low speed for GPIOA pin 3
-      GPIOA_OSPEEDER_REG &= ~(0x3 << 8);
+   /*GPIO OSPEEDR register*/
+   //Set Low speed for GPIOA pin 3
+   GPIOA_OSPEEDER_REG &= ~(0x3 << 8);
 
    /*GPIO PUPDR register, reset*/
    GPIOA_PUPDR_REG &= ~(0x3 << 6);
@@ -108,9 +106,6 @@ int main(void)
 
 }
 
-/* USER CODE BEGIN 4 */
-
-/* USER CODE END 4 */
 
 /**
   * @brief  This function is executed in case of error occurrence.
